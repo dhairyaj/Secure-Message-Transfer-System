@@ -1,3 +1,111 @@
+<?php
+
+  session_start();
+
+  //Variable Initialisation
+  $semail = "";
+  $remail = "";
+  $msgsub = "";
+  $message = "";
+  $cipher = "";
+  $enkey = "";
+  $enmsg = "";
+  $method ="";
+
+  //Create Connection
+  $conn = mysqli_connect("localhost","root","","message_transfer");
+
+  //Check Connection
+  if (!$conn){
+    die("Connection Failed: " . mysqli_connect_error());
+  }
+
+  //For entering the data in table
+
+  //check the fields are empty or not
+
+  if(isset($_POST['encrypt'])){
+    if(empty($_POST['semail']) || empty($_POST['remail']) || empty($_POST['msgsub']) || empty($_POST['message']) || empty($_POST['cipher']) || empty($_POST['enkey'])){
+      echo '<script>alert("Please fill all the fields")</script>';
+    }
+    else{
+
+      //fetch data from the form and store in variables
+
+      $semail = mysqli_real_escape_string($conn, $_POST['semail']);
+      $remail = mysqli_real_escape_string($conn, $_POST['remail']);
+      $msgsub = mysqli_real_escape_string($conn, $_POST['msgsub']);
+      $message = mysqli_real_escape_string($conn, $_POST['message']);
+      $cipher = mysqli_real_escape_string($conn, $_POST['cipher']);
+      $enkey = mysqli_real_escape_string($conn, $_POST['enkey']);
+
+      $user_check_query = "SELECT * FROM users WHERE email='$semail' AND email='$remail'";
+      $result = mysqli_query($conn, $user_check_query);
+      $mail = mysqli_fetch_assoc($result);
+
+      if($mail['email'] === $semail and $mail['email'] === $remail){
+        
+        $en_iv = "1029199712021998";
+        $options = 0;
+
+        //Encryption using RC4
+        if($cipher === "RC4"){
+          
+            $method = "RC4";
+            $iv_length = openssl_cipher_iv_length($method);
+
+            $enmsg = openssl_encrypt($message, $method, $enkey, $options);
+            echo '<script>alert("Sent Successfully.")</script>';
+
+        }
+        
+        //Encryption using AES-128-CBC
+        if($cipher === "AES-128"){
+          
+          $method = "AES-128-CBC";
+          $iv_length = openssl_cipher_iv_length($method);
+
+          $enmsg = openssl_encrypt($message, $method, $enkey, $options, $en_iv);
+          echo '<script>alert("Sent Successfully.")</script>';
+
+        }
+
+        //Encryption using AES-192-CBC
+        if($cipher === "AES-192"){
+          
+          $method = "AES-192-CBC";
+          $iv_length = openssl_cipher_iv_length($method);
+
+          $enmsg = openssl_encrypt($message, $method, $enkey, $options, $en_iv);
+          echo '<script>alert("Sent Successfully.")</script>';
+
+        }
+
+        //Encryption using AES-256-CBC
+        if($cipher === "AES-256"){
+          
+          $method = "AES-256-CBC";
+          $iv_length = openssl_cipher_iv_length($method);
+
+          $enmsg = openssl_encrypt($message, $method, $enkey, $options, $en_iv);
+          echo '<script>alert("Sent Successfully.")</script>';
+
+        }
+        
+        //Insert into table
+
+        $query = "INSERT INTO data_store (semail, remail, msgsub, message, cipher, enkey, enmsg) VALUES('$semail', '$remail', '$msgsub', '$message', '$cipher', '$enkey', '$enmsg')";
+        mysqli_query($conn, $query);
+        echo '<script>alert("Sent Successfully.")</script>';
+        header('location: sentmsg.php');
+
+      }
+      
+    }
+  }
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -69,8 +177,8 @@
 
               <div class="row">
                 <div class="input-field">
-                  <i class="material-icons prefix" style="float: left;">lock</i>
-                  <select>
+                  <i class="material-icons prefix">lock</i>
+                  <select name="cipher">
                     <option value="" disabled selected>Choose your option</option>
                     <option value="1">AES-128</option>
                     <option value="2">AES-192</option>
