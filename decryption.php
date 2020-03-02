@@ -2,6 +2,9 @@
 
   session_start();
 
+  //Initialisating Session Variables
+  $_SESSION['message'] = "";
+
   //Initialising Variables
   $semail = "";
   $msgsub = "";
@@ -107,6 +110,7 @@
     
   }
 
+  $_SESSION['message'] = $message;
 
 ?>
 

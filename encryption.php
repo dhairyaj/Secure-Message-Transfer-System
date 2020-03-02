@@ -102,7 +102,7 @@
         
         //Insert into table
 
-        $query = "INSERT INTO data_store (semail, remail, msgsub, message, cipher, enkey, enmsg) VALUES('$semail', '$remail', '$msgsub', '$message', '$cipher', '$enkey', '$enmsg')";
+        $query = "INSERT INTO data_store (semail, remail, msgsub, msg, cipher, cipher_key, enmsg) VALUES('$semail', '$remail', '$msgsub', '$message', '$cipher', '$enkey', '$enmsg')";
         mysqli_query($conn, $query);
         echo '<script>alert("Sent Successfully.")</script>';
         header('location: sentmsg.php');
@@ -110,9 +110,12 @@
       }
       
     }
+
   }
 
   $_SESSION['enmsg'] = $enmsg;
+  $_SESSION['cipher'] = $method;
+  $_SESSION['msgsub'] = $msgsub;
 
 ?>
 
