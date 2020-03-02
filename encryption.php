@@ -111,11 +111,19 @@
       
     }
 
-  }
+      $_SESSION['enmsg'] = $enmsg;
+      $_SESSION['cipher'] = $method;
+      $_SESSION['msgsub'] = $msgsub;
 
-  $_SESSION['enmsg'] = $enmsg;
-  $_SESSION['cipher'] = $method;
-  $_SESSION['msgsub'] = $msgsub;
+  }
+  
+  else{
+
+    if(isset($_POST['back'])){
+      header('location: encryption.php');
+    }
+
+  }
 
 ?>
 

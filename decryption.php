@@ -107,10 +107,18 @@
       }
 
     }
+
+    $_SESSION['message'] = $message;
     
   }
 
-  $_SESSION['message'] = $message;
+  else{
+
+    if(isset($_POST['back'])){
+      header('location: encryption.php');
+    }
+
+  }
 
 ?>
 
