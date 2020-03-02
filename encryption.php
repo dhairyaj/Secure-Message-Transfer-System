@@ -2,6 +2,13 @@
 
   session_start();
 
+  //Initialising Session variables\
+  $_SESSION['enmsg'] = "";
+  $_SESSION['semail'] = "";
+  //$_SESSION['remail'] = "";
+  $_SESSION['msgsub'] = "";
+  $_SESSION['cipher'] = "";
+
   //Variable Initialisation
   $semail = "";
   $remail = "";
@@ -45,6 +52,7 @@
 
       if($mail['email'] === $semail and $mail['email'] === $remail){
         
+        //Providing a initialising vector
         $en_iv = "1029199712021998";
         $options = 0;
 
@@ -103,6 +111,8 @@
       
     }
   }
+
+  $_SESSION['enmsg'] = $enmsg;
 
 ?>
 

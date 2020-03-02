@@ -1,4 +1,17 @@
 <?php
+    session_start();
+
+    //Setting value stored in session variable
+    $sent_msg = $_SESSION['enmsg'];
+
+    // //Create Connection
+    // $conn = mysqli_connect("localhost","root","","message_transfer");
+
+    // //Check Connection
+    // if (!$conn){
+    //     die("Connection Failed: " . mysqli_connect_error());
+    // }
+    
 
     if(isset($_POST['back'])){
         header('location: encryption.php');
@@ -34,7 +47,9 @@
     <div class="container">
         <div class="message">
             <h3>You have sent the following message.</h3>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consectetur exercitationem dicta nostrum aspernatur officia molestias numquam dolorum aliquam, iusto tempore hic tenetur mollitia explicabo in voluptates rerum recusandae fugiat. Minima. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repudiandae rerum doloremque, id nesciunt quibusdam nisi rem officiis, aspernatur nobis, magnam odit corporis iusto nostrum ad temporibus quod quos maiores totam. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consectetur rerum soluta et itaque quaerat quas hic quidem nostrum molestias animi obcaecati ipsum vel repellat, sint qui quod magnam debitis voluptatem. Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum dolor ducimus, perferendis expedita fugiat atque reiciendis voluptatum in blanditiis obcaecati enim quidem voluptas aut similique, aperiam ipsam quas odio. Harum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto odio illo a vel ullam, sit impedit, corrupti non itaque asperiores ducimus optio. Repellat nostrum numquam ut expedita doloribus aut debitis. Lorem ipsum dolor sit amet consectetur adipisicing elit. At expedita odit, rerum sapiente, perspiciatis ex ullam id ea, quisquam consequuntur corporis accusamus maiores eligendi eum quos provident nesciunt totam quidem!</p>
+            <!--<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consectetur exercitationem dicta nostrum aspernatur officia molestias numquam dolorum aliquam, iusto tempore hic tenetur mollitia explicabo in voluptates rerum recusandae fugiat. Minima. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repudiandae rerum doloremque, id nesciunt quibusdam nisi rem officiis, aspernatur nobis, magnam odit corporis iusto nostrum ad temporibus quod quos maiores totam. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consectetur rerum soluta et itaque quaerat quas hic quidem nostrum molestias animi obcaecati ipsum vel repellat, sint qui quod magnam debitis voluptatem. Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum dolor ducimus, perferendis expedita fugiat atque reiciendis voluptatum in blanditiis obcaecati enim quidem voluptas aut similique, aperiam ipsam quas odio. Harum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto odio illo a vel ullam, sit impedit, corrupti non itaque asperiores ducimus optio. Repellat nostrum numquam ut expedita doloribus aut debitis. Lorem ipsum dolor sit amet consectetur adipisicing elit. At expedita odit, rerum sapiente, perspiciatis ex ullam id ea, quisquam consequuntur corporis accusamus maiores eligendi eum quos provident nesciunt totam quidem!</p>-->
+            <!-- Display the message using sessiion variable value -->
+            <p><?php echo $sent_msg ?></p>
         </div>
 
         <form method="POST">
