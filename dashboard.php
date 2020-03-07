@@ -3,11 +3,11 @@
     session_start();
 
     if(isset($_POST['encrypt'])){
-        header('location: encryption.html');
+        header('location: encryption.php');
     }
 
     if(isset($_POST['decrypt'])){
-        header('location: decryption.html');
+        header('location: decryption.php');
     }
 
     if(isset($_POST['logout'])){

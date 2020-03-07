@@ -46,18 +46,18 @@
       $cipher = mysqli_real_escape_string($conn, $_POST['cipher']);
       $enkey = mysqli_real_escape_string($conn, $_POST['enkey']);
 
-      $user_check_query = "SELECT * FROM users WHERE email='$semail' AND email='$remail'";
-      $result = mysqli_query($conn, $user_check_query);
-      $mail = mysqli_fetch_assoc($result);
+      // $user_check_query = "SELECT * FROM users WHERE email='$semail' AND email='$remail'";
+      // $result = mysqli_query($conn, $user_check_query);
+      // $mail = mysqli_fetch_assoc($result);
 
-      if($mail['email'] === $semail and $mail['email'] === $remail){
+     // if($mail['email'] === $semail and $mail['email'] === $remail){
         
         //Providing a initialising vector
         $en_iv = "1029199712021998";
         $options = 0;
 
         //Encryption using RC4
-        if($cipher === "RC4"){
+        if($cipher == 1){
           
             $method = "RC4";
             $iv_length = openssl_cipher_iv_length($method);
@@ -68,7 +68,7 @@
         }
         
         //Encryption using AES-128-CBC
-        if($cipher === "AES-128"){
+        if($cipher == 2){
           
           $method = "AES-128-CBC";
           $iv_length = openssl_cipher_iv_length($method);
@@ -79,7 +79,7 @@
         }
 
         //Encryption using AES-192-CBC
-        if($cipher === "AES-192"){
+        if($cipher == 3){
           
           $method = "AES-192-CBC";
           $iv_length = openssl_cipher_iv_length($method);
@@ -90,7 +90,7 @@
         }
 
         //Encryption using AES-256-CBC
-        if($cipher === "AES-256"){
+        if($cipher == 4){
           
           $method = "AES-256-CBC";
           $iv_length = openssl_cipher_iv_length($method);
@@ -107,7 +107,7 @@
         echo '<script>alert("Sent Successfully.")</script>';
         header('location: sentmsg.php');
 
-      }
+     // }
       
     }
 
@@ -120,7 +120,7 @@
   else{
 
     if(isset($_POST['back'])){
-      header('location: encryption.php');
+      header('location: dashboard.php');
     }
 
   }
@@ -201,10 +201,10 @@
                   <i class="material-icons prefix">lock</i>
                   <select name="cipher">
                     <option value="" disabled selected>Choose your option</option>
-                    <option value="1">AES-128</option>
-                    <option value="2">AES-192</option>
-                    <option value="3">AES-256</option>
-                    <option value="3">RC4</option>
+                    <option value="1">RC4</option>
+                    <option value="2">AES-128</option>
+                    <option value="3">AES-192</option>
+                    <option value="4">AES-256</option>
                   </select>
                   <label>Encryption Cipher</label>
                 </div>

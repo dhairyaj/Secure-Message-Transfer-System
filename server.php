@@ -21,7 +21,7 @@ if (!$conn) {
 //For Registering the user
 
 //check fields are empty or not
-if(isset($_POST['submit'])){
+if(isset($_POST['register'])){
   if(empty($_POST['name']) || empty($_POST['email']) || empty($_POST['pass']) || empty($_POST['cpass'])){
     echo '<script>alert("Please fill all the fields")</script>';
   }
@@ -78,12 +78,12 @@ if (isset($_POST['login'])) {
         echo '<script>alert("Password is required")</script>';
     }
 
-    $pass = md5($pass);
-  	$query = "SELECT * FROM users WHERE username='$username' AND password='$pass'";
+    //$pass = md5($pass);
+  	$query = "SELECT * FROM users WHERE email='$email' AND password='$pass'";
   	$results = mysqli_query($conn, $query);
   	if (mysqli_num_rows($results) == 1) {
   	  echo '<script>alert("Logged in successfully")</script>';
-  	  header('location: dashboard.html');
+  	  header('location: dashboard.php');
     }
       else {
         echo '<script>alert("Wrong Credentials")</script>';

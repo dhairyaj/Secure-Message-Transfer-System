@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
     <!--Import Custom CSS-->
-    <link rel="stylesheet" href="/styles/style.css">
+    <link rel="stylesheet" href="C:\xampp\htdocs\project1\styles\style.css">
 
     <!-- Compiled and minified jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -69,7 +69,7 @@
 
               <button class="btn waves-effect waves-light" type="submit" name="register">Register</button>
 
-              <p>Already Registered!! <a href="login.html">Login here.</a></p>
+              <p>Already Registered!! <a href="login.php">Login here.</a></p>
             </form>
           </div>
         </div>

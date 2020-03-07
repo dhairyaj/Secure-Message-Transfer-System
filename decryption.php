@@ -44,11 +44,11 @@
       $mail = mysqli_fetch_assoc($result1);
       $data = mysqli_fetch_assoc($result2);
 
-      if($mail['email'] === $remail){
+      //if($mail['email'] === $remail){
 
-        if($data['msgsub'] === $msgsub and $data['cipher_key'] === $dekey){
+        if($data['msgsub'] == $msgsub and $data['cipher_key'] == $dekey){
 
-          if($enmsg === $_SESSION['enmsg']){
+          if($enmsg == $_SESSION['enmsg']){
 
             $cipher = $data['cipher'];
 
@@ -56,14 +56,14 @@
 
         }
 
-      }
+      //}
 
       //Providing a initialising vector
       $de_iv = "1029199712021998";
       $options = 0;
 
       //Decryption using RC4
-      if($cipher === "RC4"){
+      if($cipher == 1){
         
           $method = "RC4";
           $iv_length = openssl_cipher_iv_length($method);
@@ -74,7 +74,7 @@
       }
       
       //Encryption using AES-128-CBC
-      if($cipher === "AES-128"){
+      if($cipher == 2){
         
         $method = "AES-128-CBC";
         $iv_length = openssl_cipher_iv_length($method);
@@ -85,7 +85,7 @@
       }
 
       //Encryption using AES-192-CBC
-      if($cipher === "AES-192"){
+      if($cipher == 3){
         
         $method = "AES-192-CBC";
         $iv_length = openssl_cipher_iv_length($method);
@@ -96,7 +96,7 @@
       }
 
       //Encryption using AES-256-CBC
-      if($cipher === "AES-256"){
+      if($cipher == 4){
         
         $method = "AES-256-CBC";
         $iv_length = openssl_cipher_iv_length($method);
@@ -109,13 +109,15 @@
     }
 
     $_SESSION['message'] = $message;
+    echo '<script>alert("Recieved Successfully.")</script>';
+    header('location: recievedmsg.php');
     
   }
 
   else{
 
     if(isset($_POST['back'])){
-      header('location: encryption.php');
+      header('location: dashboard.php');
     }
 
   }
@@ -155,7 +157,7 @@
               <div class="row">
                 <div class="input-field">
                   <i class="material-icons prefix">email</i>
-                  <input id="semail" type="email" class="validate">
+                  <input id="semail" type="email" class="validate" name="semail">
                   <label for="semail">Recieved From</label>
                 </div>
               </div>
@@ -163,7 +165,7 @@
               <div class="row">
                 <div class="input-field">
                   <i class="material-icons prefix">subject</i>
-                  <input id="msgsub" type="text">
+                  <input id="msgsub" type="text" name="msgsub">
                   <label for="msgsub">Subject</label>
                 </div>
               </div>
@@ -171,7 +173,7 @@
               <div class="row">
                 <div class="input-field">
                   <i class="material-icons prefix">message</i>
-                  <textarea id="enmsg" class="materialize-textarea"></textarea>
+                  <textarea id="enmsg" class="materialize-textarea" name="enmsg"></textarea>
                   <label for="enmsg">Recieved Message</label>
                 </div>
               </div>
@@ -179,7 +181,7 @@
               <div class="row">
                 <div class="input-field">
                   <i class="material-icons prefix">vpn_key</i>
-                  <input id="dekey" type="text">
+                  <input id="dekey" type="text" name="dekey">
                   <label for="dekey">Decryption Key</label>
                 </div>
               </div>              
